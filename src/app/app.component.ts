@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ngdemo03';
+
+  listOfUser: any;
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
+    this.userService.findAll().subscribe((results) =>{
+      this.listOfUser = results.data;
+      console.log(this.listOfUser);
+    });
+  }
 }
